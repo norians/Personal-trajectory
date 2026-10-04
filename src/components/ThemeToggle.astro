@@ -1,0 +1,109 @@
+---
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<button class="theme-toggle" type="button" aria-label="Cambiar al tema oscuro" aria-pressed="false" title="Cambiar al tema oscuro">
+	<span class="theme-toggle__track" aria-hidden="true">
+		<Icon name="sun" class="theme-toggle__icon theme-toggle__icon--sun" />
+		<Icon name="moon" class="theme-toggle__icon theme-toggle__icon--moon" />
+		<span class="theme-toggle__thumb"></span>
+	</span>
+</button>
+
+<script>
+	const toggles = Array.from(document.querySelectorAll<HTMLButtonElement>('.theme-toggle'));
+	const storageKey = 'starlight-theme';
+
+	function syncToggles() {
+		const isDark = document.documentElement.dataset.theme === 'dark';
+		const label = isDark ? 'Cambiar al tema claro' : 'Cambiar al tema oscuro';
+		for (const toggle of toggles) {
+			toggle.setAttribute('aria-pressed', String(isDark));
+			toggle.setAttribute('aria-label', label);
+			toggle.title = label;
+		}
+	}
+
+	for (const toggle of toggles) {
+		toggle.addEventListener('click', () => {
+			const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+			document.documentElement.dataset.theme = nextTheme;
+			localStorage.setItem(storageKey, nextTheme);
+			syncToggles();
+		});
+	}
+
+	syncToggles();
+</script>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		width: 3.25rem;
+		height: 2.5rem;
+		padding: 0;
+		border: 0;
+		border-radius: 999px;
+		background: transparent;
+		color: var(--sl-color-text);
+		cursor: pointer;
+	}
+
+	.theme-toggle:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 2px;
+	}
+
+	.theme-toggle__track {
+		position: relative;
+		display: block;
+		width: 3rem;
+		height: 1.65rem;
+		border: 1px solid var(--sl-color-gray-4);
+		border-radius: 999px;
+		background: var(--sl-color-gray-6);
+	}
+
+	.theme-toggle__icon {
+		position: absolute;
+		top: 0.34rem;
+		width: 0.92rem;
+		height: 0.92rem;
+		z-index: 1;
+	}
+
+	.theme-toggle__icon--sun {
+		left: 0.32rem;
+		color: var(--sl-color-orange-high);
+	}
+
+	.theme-toggle__icon--moon {
+		right: 0.32rem;
+		color: var(--sl-color-blue-high);
+	}
+
+	.theme-toggle__thumb {
+		position: absolute;
+		top: 0.13rem;
+		left: 0.13rem;
+		width: 1.27rem;
+		height: 1.27rem;
+		border-radius: 50%;
+		background: var(--sl-color-white);
+		box-shadow: 0 1px 3px rgb(0 0 0 / 25%);
+		transition: transform 160ms ease;
+	}
+
+	:global([data-theme='dark']) .theme-toggle__thumb {
+		transform: translateX(1.35rem);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.theme-toggle__thumb {
+			transition: none;
+		}
+	}
+</style>

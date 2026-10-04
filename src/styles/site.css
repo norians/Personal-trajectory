@@ -1,0 +1,81 @@
+@import 'katex/dist/katex.min.css';
+
+:root {
+	--sl-font: 'Aptos', 'Segoe UI', sans-serif;
+	--sl-font-system: 'Aptos', 'Segoe UI', sans-serif;
+	--sl-hue-accent: 174;
+	--sl-color-accent-low: hsl(174, 32%, 88%);
+	--sl-color-accent: hsl(174, 78%, 27%);
+	--sl-color-accent-high: hsl(174, 70%, 16%);
+}
+
+[data-theme='dark'] {
+	--sl-color-accent-low: hsl(174, 34%, 20%);
+	--sl-color-accent: hsl(174, 76%, 62%);
+	--sl-color-accent-high: hsl(174, 70%, 82%);
+}
+
+.sl-markdown-content {
+	font-size: 1.05rem;
+	line-height: 1.78;
+}
+
+.katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding-block: 0.2rem;
+}
+
+.sidebar-pane {
+	background-color: transparent;
+	border-inline-end-color: transparent;
+}
+
+@media (min-width: 50rem) {
+	.header > div:nth-child(2) {
+		justify-content: flex-start;
+	}
+
+	.header > div:nth-child(2) button[data-open-modal] {
+		max-width: 16rem;
+	}
+}
+
+.obsidian-callout {
+	--callout-accent: var(--sl-color-blue);
+	margin-block: 1rem;
+	padding: 0.8rem 1rem;
+	border-inline-start: 0.25rem solid var(--callout-accent);
+	border-radius: 0.25rem;
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-text);
+}
+
+.obsidian-callout--tip,
+.obsidian-callout--success {
+	--callout-accent: var(--sl-color-green);
+}
+
+.obsidian-callout--warning,
+.obsidian-callout--caution {
+	--callout-accent: var(--sl-color-orange);
+}
+
+.obsidian-callout--danger,
+.obsidian-callout--failure {
+	--callout-accent: var(--sl-color-red);
+}
+
+.obsidian-callout--question,
+.obsidian-callout--important {
+	--callout-accent: var(--sl-color-purple);
+}
+
+.obsidian-callout__title {
+	margin: 0 0 0.4rem;
+	font-weight: 700;
+}
+
+.obsidian-callout > :last-child {
+	margin-bottom: 0;
+}

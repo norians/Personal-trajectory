@@ -1,0 +1,86 @@
+---
+interface Props {
+	name: string;
+	description: string;
+	href?: string;
+	image?: string;
+	imageAlt?: string;
+}
+
+const { name, description, href, image, imageAlt = '' } = Astro.props;
+---
+
+<article class="product-card">
+	{image && <img class="product-card__image" src={image} alt={imageAlt} loading="lazy" />}
+	<div class="product-card__body">
+		<p class="product-card__eyebrow">Recomendación</p>
+		<h2>{name}</h2>
+		<p>{description}</p>
+		{href && (
+			<a href={href} rel="sponsored nofollow noopener">
+				Ver recomendación <span aria-hidden="true">→</span>
+			</a>
+		)}
+	</div>
+</article>
+
+<style>
+	.product-card {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 1.25rem;
+		align-items: center;
+		margin-block: 1.25rem;
+		padding: 1.25rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.375rem;
+		background: var(--sl-color-bg-inline-code);
+	}
+
+	.product-card__image {
+		grid-column: 2;
+		grid-row: 1;
+		width: min(9rem, 30vw);
+		max-height: 9rem;
+		object-fit: contain;
+	}
+
+	.product-card__body {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.product-card__eyebrow {
+		margin: 0 0 0.4rem;
+		color: var(--sl-color-text-accent);
+		font-size: 0.8rem;
+		font-weight: 650;
+	}
+
+	h2 {
+		margin: 0 0 0.5rem;
+		font-size: 1.15rem;
+	}
+
+	.product-card__body > p:not(.product-card__eyebrow) {
+		margin: 0 0 0.75rem;
+	}
+
+	@media (max-width: 34rem) {
+		.product-card {
+			grid-template-columns: 1fr;
+		}
+
+		.product-card__image {
+			grid-column: 1;
+			grid-row: 1;
+			width: min(100%, 12rem);
+			max-height: 8rem;
+		}
+
+		.product-card__body {
+			grid-column: 1;
+			grid-row: 2;
+		}
+	}
+</style>
