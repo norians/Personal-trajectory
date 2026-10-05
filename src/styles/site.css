@@ -31,11 +31,20 @@
 	border-inline-end-color: transparent;
 }
 
-@media (min-width: 50rem) {
-	.header > div:nth-child(2) {
-		justify-content: flex-start;
-	}
+.header {
+	background-color: transparent;
+	border-bottom-color: transparent;
+}
 
+.site-title {
+	display: none;
+}
+
+.header > div:nth-child(2) {
+	justify-content: flex-end;
+}
+
+@media (min-width: 50rem) {
 	.header > div:nth-child(2) button[data-open-modal] {
 		max-width: 16rem;
 	}

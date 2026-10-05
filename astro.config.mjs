@@ -22,7 +22,7 @@ export default defineConfig({
 	integrations: [
 		sitemap(),
 		starlight({
-			title: 'No vas tarde en STEM',
+			title: ' en STEM',
 			description: 'Mi trayectoria personal y mis apuntes de STEM.',
 			locales: { root: { label: 'Español', lang: 'es' } },
 			customCss: ['./src/styles/site.css'],
@@ -33,11 +33,17 @@ export default defineConfig({
 			plugins: [
 				starlightSidebarTopics([
 					{
-						label: 'Personal',
+						label: 'Inicio',
 						id: 'personal',
 						link: '/',
 						items: [
-							{ label: 'Trayectoria', slug: 'trayectoria' },
+						],
+					},
+					{
+						label: 'Mi trayectoria',
+						id: 'trayectoria',
+						link: '/trayectoria',
+						items: [
 						],
 					},
 					{
@@ -59,9 +65,16 @@ export default defineConfig({
 									{ label: 'Métodos numéricos', items: [{ autogenerate: { directory: 'apuntes/matematicas/metodos-numericos', collapsed: true } }] },
 								],
 							},
-							'esenciales',
 						],
 					},
+					// {
+					// 	label: 'Mis esenciales',
+					// 	id: 'esenciales',
+					// 	link: '/esenciales/',
+					// 	items: [
+					// 		{ label: 'Física I', items: [{ autogenerate: { directory: 'apuntes/fisica-1', collapsed: true } }] },
+					// 	],
+					// }
 				], {
 					topics: {
 						personal: [
